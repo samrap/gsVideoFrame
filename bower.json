@@ -1,0 +1,23 @@
+{
+  "name": "Gigasavvy VideoFrame jQuery Plugin",
+  "version": "0.0.1",
+  "homepage": "https://github.com/loganstellway/gsVideoFrame",
+  "authors": [
+    "Logan Stellway <logan@gigasavvy.com>"
+  ],
+  "description": "jQuery plugin for embedding iFrame videos from common video providers",
+  "keywords": [
+    "iframe",
+    "video",
+    "embed",
+    "gigasavvy"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
