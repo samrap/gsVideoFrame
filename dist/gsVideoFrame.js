@@ -2,7 +2,7 @@
   /**
    * Video Anchors
    */
-  $.fn.videoFrame = function(options){
+  $.fn.gsVideoFrame = function(options){
     // Unique ID
     var d = new Date();
 
