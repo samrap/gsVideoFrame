@@ -6,15 +6,23 @@
     // Unique ID
     var d = new Date();
 
-    // Set options
     var defaults = {
+      // Default Variables
       'autoplay': 1,
       'element': $(this),
       'playing': false,
       'id': 'video' + d.getTime(),
       'container': '.embed-responsive',
       'type': '',
-      'src': ''
+      'src': '',
+
+      // Events
+      'onBeforeOpen':  function(){},
+      'onOpen':        function(){},
+      'onPause':       function(){},
+      'onPlay':        function(){},
+      'onBeforeClose': function(){},
+      'onClose':       function(){}
     };
     options = $.extend(defaults, options);
 
@@ -153,6 +161,12 @@
       options.state = function( state ){
         if( state.data === 0 ){
           options.close();
+        }else if( state.data === 1 ){
+          // onPlay Event
+          options.onPlay();
+        }else if( state.data === 2 ){
+          // onPause Event
+          options.onPause();
         }
       };
 
@@ -233,6 +247,14 @@
 
         // When the player is ready/loaded, add a finish event listener
         options.player.addEvent('ready', function() {
+          options.player.addEvent('play', function(){
+            // onPlay Event
+            options.onPlay();
+          });
+          options.player.addEvent('pause', function(){
+            // onPause Event
+            options.onPause();
+          });
           options.player.addEvent('finish', function(){
             options.close();
           });
@@ -278,16 +300,23 @@
 
     // Close Video
     options.close = function(){
+      // onBeforeClose Event
+      options.onBeforeClose();
+
       // Remove "esc" key listener
       options.playing = false;
 
       // Remove Video
       options.content.stop().animate({'opacity':0}, 250, function(){
+        // Remove Content
         $(this).remove();
+
+        // onClose Event
+        options.onClose();
+
+        // Clear Options
         options = {};
       });
-
-      options = {};
     };
 
 
@@ -311,6 +340,9 @@
 
     // Append Content
     options.append = function( content ){
+      // onBeforeOpen Event
+      options.onBeforeOpen();
+
       options.content = content;
 
       // Append Iframe
@@ -321,7 +353,10 @@
       }
 
       // Fade In
-      options.content.stop().animate({'opacity':1}, 250);
+      options.content.stop().animate({'opacity':1}, 250, function(){
+        // onOpen Event
+        options.onOpen();
+      });
 
       // Create close functions
       options.initClose();
