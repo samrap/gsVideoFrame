@@ -2,19 +2,38 @@
   /**
    * Video Anchors
    */
-  $.fn.videoFrame = function(){
+  $.fn.videoFrame = function(options){
     // Unique ID
     var d = new Date();
 
     // Set options
-    var options = {
+    var defaults = {
       'autoplay': 1,
-      'anchor': $(this),
+      'element': $(this),
       'playing': false,
       'id': 'video' + d.getTime(),
       'container': '.embed-responsive',
-      'src': $(this).attr('href')
+      'type': '',
+      'src': ''
     };
+    options = $.extend(defaults, options);
+
+    // If Video Type Specified
+    if( typeof options.element.data('type') !== 'undefined' && ['youtube','vimeo'].indexOf(options.element.data('type').trim()) ){
+      options.type = $(this).data('type');
+    }
+
+    // If Video Src Specified
+    if( options.src.trim() === '' ){
+      if (typeof options.element.data('src') !== 'undefined') {
+        options.src = $(this).data('src');
+      } else if(typeof options.element.attr('href') !== 'undefined') {
+        options.src = $(this).attr('href');
+      }
+    }
+
+
+
 
 
     // Inject API
@@ -246,11 +265,11 @@
     // Get Embed URL
     options.embed = function(){
       // YouTube
-      if( options.src.indexOf('youtu') >= 0 ){
+      if( options.type === 'youtube' || options.src.indexOf('youtu') >= 0 ){
         options.youtube();
       }
       // Vimeo
-      else if( options.src.indexOf('vimeo') >= 0 ){
+      else if( options.type === 'vimeo' || options.src.indexOf('vimeo') >= 0 ){
         options.vimeo();
       }
     };
@@ -295,8 +314,8 @@
       options.content = content;
 
       // Append Iframe
-      if( options.anchor.parents( options.container ).length > 0 ){
-        options.anchor.parents( options.container ).first().append( content );
+      if( options.element.parents( options.container ).length > 0 ){
+        options.element.parents( options.container ).first().append( content );
       } else {
         $('body').append( options.content );
       }
@@ -318,7 +337,7 @@
       }
 
       // iFrame
-      options.iframe = $('<iframe allowfullscreen mozallowfullscreen webkitallowfullscreen />').attr({
+      options.iframe = $('<iframe allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen />').attr({
         'src': url,
         'frameborder': '0',
         'id': options.id
