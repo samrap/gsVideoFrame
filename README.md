@@ -19,6 +19,21 @@ Include gsVideoFrame
 
 
 
+## Options
+
+#### src - (string)
+The `src` attribute is the URL to view the video. The script will parse YouTube and Vimeo URL's and will create an iFrame embed from them.
+
+Note: YouTube URL's with `.com` and `.be` are currently supported.
+
+#### type - (string)
+The video type. Accepted values are: `youtube` and `vimeo`
+
+#### autoplay - (boolean)
+This parameter determines whether or not the video automatically plays once it is opened
+
+
+
 ## Events
 
 #### onBeforeOpen()
