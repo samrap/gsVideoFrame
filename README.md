@@ -5,17 +5,19 @@ Iframe embedded popups for common Video providers
 
 ```bower install --save gsVideoFrame```
 
-***
+
 
 ## Usage
 
 Include jQuery
+
 ```<script type="text/javascript" src="//code.jquery.com/jquery-3.0.0.min.js"></script>```
 
 Include gsVideoFrame
+
 ```<script type="text/javascript" src="./dist/gsVideoFrame.min.js"></script>```
 
-***
+
 
 ## Events
 
