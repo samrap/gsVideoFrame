@@ -12,7 +12,10 @@
       'element': $(this),
       'playing': false,
       'id': 'video' + d.getTime(),
-      'container': '.embed-responsive',
+      'target': false,
+      'closeButtonClass': 'close',
+      'container': 'div',
+      'containerClass': 'embed-responsive-item',
       'type': '',
       'src': '',
 
@@ -345,10 +348,21 @@
 
       options.content = content;
 
-      // Append Iframe
-      if( options.element.parents( options.container ).length > 0 ){
-        options.element.parents( options.container ).first().append( content );
+      // Append Content
+      if (options.target instanceof jQuery && options.target.length > 0) {
+        console.log('Target acquired');
+
+        // Target is jQuery Object
+        options.target.append(options.content);
+      } else if (typeof options.target==='string' && $(options.target).length > 0) {
+        console.log('Target stringified');
+
+        // Look for target element with provided selector string
+        $(options.target).first().append(options.content);
       } else {
+        console.log('Looget dat body');
+
+        // Append to <body>
         $('body').append( options.content );
       }
 
@@ -379,16 +393,35 @@
       });
 
       // Create Close Button
-      options.tmp = $('<i />').attr({
-        'class': 'close'
-      }).on('click', function(){
+      if (!(options.closeButton instanceof jQuery)) {
+        // If no string passed
+        if (typeof options.closeButton !== 'string') {
+          options.closeButton = 'i';
+        }
+
+        // Create jQuery Object
+        options.closeButton = $('<' + options.closeButton + ' />');
+      }
+
+      // Add class to close button
+      if (typeof options.closeButtonClass === 'string') {
+        options.closeButton.addClass( options.closeButtonClass );
+      }
+
+      // Add click function to close button
+      options.closeButton.on('click', function(){
         options.close();
       });
 
-      // Div containing iFrame
-      options.tmp = $('<div />').attr({
-        'class': 'embed-responsive-item'
-      }).css({'opacity':0}).append( options.iframe, options.tmp );
+      // Element Containing iFrame
+      options.tmp = $('<' + options.container + ' />')
+        .css({'opacity':0})
+        .append( options.iframe, options.closeButton );
+
+      // Add Class
+      if (typeof options.containerClass === 'string') {
+        options.tmp.addClass( options.containerClass );
+      }
 
       // Append Content
       options.append( options.tmp );
