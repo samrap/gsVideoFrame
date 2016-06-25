@@ -267,7 +267,7 @@
       // Initiate
       this.init = function(){
         // Inject API with callback function
-        options.api('//f.vimeocdn.com/js/froogaloop2.min.js', 'vimeo-api', function(){
+        options.api('https://f.vimeocdn.com/js/froogaloop2.min.js', 'vimeo-api', function(){
           // Create Iframe
           options.frame( options.getUrl() );
 
@@ -350,18 +350,12 @@
 
       // Append Content
       if (options.target instanceof jQuery && options.target.length > 0) {
-        console.log('Target acquired');
-
         // Target is jQuery Object
         options.target.append(options.content);
       } else if (typeof options.target==='string' && $(options.target).length > 0) {
-        console.log('Target stringified');
-
         // Look for target element with provided selector string
         $(options.target).first().append(options.content);
       } else {
-        console.log('Looget dat body');
-
         // Append to <body>
         $('body').append( options.content );
       }
