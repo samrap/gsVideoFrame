@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Gigasavvy VideoFrame jQuery Plugin</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<style type="text/css">
+.embed-responsive-item {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1010;
+    position: fixed;
+}
+.embed-responsive-item iframe {
+    width: 100%;
+    height: 100%;
+}
+.embed-responsive-item .close {
+    top: 15px;
+    right: 15px;
+    width: 3em;
+    height: 3em;
+    z-index: 1015;
+    position: fixed;
+    border: 2px solid #fff;
+    background: rgba(0,0,0,0.5);
+}
+</style>
+</head>
+<body>
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>Gigasavvy VideoFrame jQuery Plugin</h1>
+        Iframe embedded popups for common Video providers
+
+        <h2>Examples</h2>
+        <a href="https://www.youtube.com/watch?v=N6-2fVsFV8E" class="btn btn-primary video">YouTube.com</a>
+        <a href="https://youtu.be/ZwzY1o_hB5Y" class="btn btn-primary video">YouTu.be</a>
+        <a href="https://vimeo.com/87701971" class="btn btn-primary video">Vimeo.com</a>
+    </div>
+</div>
+<p>&nbsp;</p>
+
+<div class="container">
+    <section class="panel">
+        <h2>Install with Bower</h2>
+        <pre class="bg-info">bower install --save gsVideoFrame</pre>
+        <p>&nbsp;</p>
+    </section>
+
+    <section class="panel">
+        <h2>Usage</h2>
+        <p>Include jQuery</p>
+        <pre class="bg-info">&lt;script type="text/javascript" src="//code.jquery.com/jquery-3.0.0.min.js"&gt;&lt;/script&gt;</pre>
+        <p>Include gsVideoFrame</p>
+        <pre class="bg-info">&lt;script type="text/javascript" src="./dist/gsVideoFrame.min.js"&gt;&lt;/script&gt;</pre>
+        <p>&nbsp;</p>
+    </section>
+
+    <section class="panel">
+        <h2>Options</h2>
+        <ul>
+            <li><b>src</b> (<a href="http://api.jquery.com/Types/#String" target="_blank">string</a>)
+                <ul>
+                    <li>The <code>src</code> attribute is the URL to view the video.
+                        <ul>
+                            <li>The script will parse YouTube and Vimeo URL's and will create an iFrame embed from them.</li>
+                            <li><b><i>Note:</i></b> YouTube URL's with .com and .be are currently supported.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><b>type</b> (<a href="http://api.jquery.com/Types/#String" target="_blank">string</a>)
+                <ul>
+                    <li>The video type. Accepted values are: <code>youtube</code> and <code>vimeo</code></li>
+                </ul>
+            </li>
+            <li><b>target</b> (<a href="http://api.jquery.com/Types/#String" target="_blank">string</a> | jQuery <a href="http://api.jquery.com/Types/#Object" target="_blank">object</a>) [Default <code>false</code>]
+                <ul>
+                    <li>The target where the video should be embedded.
+                        <ul>
+                            <li>This can be a selector string (ex: <code>"#gsVideoFrame"</code>)</li>
+                            <li>Or this can be a jQuery object (ex: <code>$('#gsVideoFrame')</code>).</li>
+                            <li>In the default case <code>false</code> or if the target cannot be found, the video will be appended to the <code>body</code> element.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><b>container</b> (<a href="http://api.jquery.com/Types/#String" target="_blank">string</a> [Default <code>div</code>]
+                <ul>
+                    <li>The type of element the iFrame should be wrapped in.</li>
+                </ul>
+            </li>
+            <li><b>containerClass</b> (<a href="http://api.jquery.com/Types/#String" target="_blank">string</a>)
+                <ul>
+                    <li>Class to be assigned to the container element.</li>
+                </ul>
+            </li>
+            <li><b>closeButton</b> (<a href="http://api.jquery.com/Types/#String" target="_blank">string</a> | jQuery <a href="http://api.jquery.com/Types/#Object" target="_blank">object</a>)
+                <ul>
+                    <li>A jQuery object to be appended to the iFrames container.
+                        <ul>
+                            <li>Example: <code>$('a.gsVideoFrame').gsVideoFrame({'closeButton': $('&lt;div /&gt;').addClass('close')});</code></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><b>closeButtonClass</b> (<a href="http://api.jquery.com/Types/#String" target="_blank">string</a> [Default <code>close</code>])
+                <ul>
+                    <li>Class to be added to closeButton element.</li>
+                </ul>
+            </li>
+            <li><b>autoplay</b> (<a href="http://api.jquery.com/Types/#Boolean" target="_blank">boolean</a>) [Default <code>true</code>]
+                <ul>
+                    <li>This parameter determines whether or not the video automatically plays once it is opened</li>
+                </ul>
+            </li>
+        </ul>
+        <p>&nbsp;</p>
+    </section>
+
+    <section class="panel">
+        <h2>Events</h2>
+        <ul>
+            <li><b>onBeforeOpen()</b> (<a href="http://api.jquery.com/Types/#Function" target="_blank">function</a>)
+                <ul>
+                    <li>Called before the frame is embedded.</li>
+                </ul>
+            </li>
+            <li><b>onOpen()</b> (<a href="http://api.jquery.com/Types/#Function" target="_blank">function</a>)
+                <ul>
+                    <li>Called when the frame is embedded.</li>
+                </ul>
+            </li>
+            <li><b>onPlay()</b> (<a href="http://api.jquery.com/Types/#Function" target="_blank">function</a>)
+                <ul>
+                    <li>Called when the video is played.</li>
+                </ul>
+            </li>
+            <li><b>onPause()</b> (<a href="http://api.jquery.com/Types/#Function" target="_blank">function</a>)
+                <ul>
+                    <li>Called when the video is paused.</li>
+                </ul>
+            </li>
+            <li><b>onBeforeClose()</b> (<a href="http://api.jquery.com/Types/#Function" target="_blank">function</a>)
+                <ul>
+                    <li>Called before the video is closed.</li>
+                </ul>
+            </li>
+            <li><b>onClose()</b> (<a href="http://api.jquery.com/Types/#Function" target="_blank">function</a>)
+                <ul>
+                    <li>Called when the video is closed.</li>
+                </ul>
+            </li>
+        </ul>
+        <p>&nbsp;</p>
+    </section>
+</div>
+
+<!-- Include jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<!-- Include Gigasavvy VideoFrame Plugin -->
+<script type="text/javascript" src="dist/gsVideoFrame.min.js"></script>
+<script type="text/javascript">
+(function(code){
+    code(window.jQuery, document, window);
+}(function($, document, window){
+    $(function(){
+        $('a.video').on('click', function(e){
+            e.preventDefault();
+            $(this).gsVideoFrame();
+        });
+    });
+}));
+</script>
+
+</body>
+</html>
