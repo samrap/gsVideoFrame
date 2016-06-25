@@ -29,6 +29,28 @@ Note: YouTube URL's with `.com` and `.be` are currently supported.
 #### type - (string)
 The video type. Accepted values are: `youtube` and `vimeo`
 
+#### target - (string|jQuery Object)
+The target where the video should be embedded. This can either be a selector string (ex: `#gsVideoFrame`) or a jQuery object (ex: `$('#gsVideoFrame')`)
+
+Default `false`. In the default case or if the target cannot be found, the video will be appended to the `body` element.
+
+#### container - (string)
+The type of element the iFrame should be wrapped in.
+
+#### containerClass - (string)
+Class to be assigned to the container element.
+
+#### closeButton (string|jQuery Object)
+A jQuery object to be appended to the iFrames container.
+
+Example:
+> $('a.gsVideoFrame').gsVideoFrame({
+>     'closeButton': $('<div />').addClass('close')
+> });
+
+#### closeButtonClass (string)
+Class to be added to closeButton element.
+
 #### autoplay - (boolean)
 This parameter determines whether or not the video automatically plays once it is opened
 
