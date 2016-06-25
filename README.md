@@ -48,20 +48,15 @@ Include gsVideoFrame
 
 ## Events
 
-#### onBeforeOpen()
-Called before the frame is embedded.
-
-#### onOpen()
-Called when the frame is embedded.
-
-#### onPlay()
-Called when the video is played
-
-#### onPause()
-Called when the video is paused
-
-#### onBeforeClose()
-Called before the video is closed
-
-#### onClose()
-Called when the video is closed
+  - **onBeforeOpen()** ([function](http://api.jquery.com/Types/#Function))
+    - Called before the frame is embedded.
+  - **onOpen()** ([function](http://api.jquery.com/Types/#Function))
+    - Called when the frame is embedded.
+  - **onPlay()** ([function](http://api.jquery.com/Types/#Function))
+    - Called when the video is played
+  - **onPause()** ([function](http://api.jquery.com/Types/#Function))
+    - Called when the video is paused
+  - **onBeforeClose()** ([function](http://api.jquery.com/Types/#Function))
+    - Called before the video is closed
+  - **onClose()** ([function](http://api.jquery.com/Types/#Function))
+    - Called when the video is closed
