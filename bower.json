@@ -5,6 +5,7 @@
   "authors": [
     "Logan Stellway <logan@gigasavvy.com>"
   ],
+  "main": "dist/gsVideoFrame.min.js",
   "description": "jQuery plugin for embedding iFrame videos from common video providers",
   "keywords": [
     "iframe",
